@@ -32,11 +32,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 			.authorizeRequests()//인증된 요청
 				.antMatchers("/")//루트와 같다면(home주소)
 				.permitAll()//누구나 허용
-				.antMatchers("/notice/**")
+//				.antMatchers("/notice/**")//이렇게 하면 이 밑에꺼는 안 먹는다고 
+				.antMatchers("/notice/list", "/notice/select")
 				.permitAll()
-				.antMatchers("/notice/insert")
+				.antMatchers("/notice/**")//순서는 이렇게 하는 좋다,,,먼저 제한 없는 거 쓰고 제한 하는 거 이케 묶어서 쓰고,,
 				.hasRole("ADMIN")
-				
+				.anyRequest().authenticated()
 //				.antMatchers("/member")
 //				.authenticated()//로그인 한 사람만 가능 //로그인 요구
 ////				.permitAll()
